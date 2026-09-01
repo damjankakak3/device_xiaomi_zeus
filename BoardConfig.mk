@@ -21,3 +21,6 @@ TARGET_VENDOR_PROP += $(DEVICE_PATH)/properties/vendor.prop
 
 # Screen density
 TARGET_SCREEN_DENSITY := 560
+
+# MIUI / Leica Camera
+include device/xiaomi/miuicamera-zeus/BoardConfig.mk

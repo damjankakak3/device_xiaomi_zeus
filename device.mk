@@ -38,3 +38,6 @@ PRODUCT_PACKAGES += \
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH)
+
+# MIUI / Leica Camera
+$(call inherit-product, device/xiaomi/miuicamera-zeus/device.mk)
