@@ -29,5 +29,9 @@ TARGET_VENDOR_PROP += $(DEVICE_PATH)/properties/vendor.prop
 # Screen density
 TARGET_SCREEN_DENSITY := 560
 
+# SELinux
+# Suppresses cosmetic vendor->system-property denials. See sepolicy/vendor/dontaudit.te.
+BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
+
 # MIUI / Leica Camera
 include device/xiaomi/miuicamera-zeus/BoardConfig.mk

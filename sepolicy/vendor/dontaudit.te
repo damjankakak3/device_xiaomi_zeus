@@ -1,0 +1,25 @@
+# Cosmetic denial suppression.
+#
+# These vendor domains probe the system property area during boot. Nothing
+# fails as a result, verified on 2026-09-04 against a booted build: telephony
+# registers and mobile data connects (Telekom HU, LTE), the fingerprint HAL
+# runs, and all 87 sensors enumerate. The only symptom is dmesg spam, 92 lines
+# in the first hour.
+#
+# dontaudit rather than allow, deliberately: every one of these is a vendor
+# domain reaching for a system property type, which is exactly the direction
+# the Treble neverallow rules exist to block. An allow rule risks failing the
+# build at the sepolicy stage for zero functional gain, since none of these
+# denials break anything.
+#
+# Counts observed before this change:
+#   rild -> default_prop                      83  (comm=DispatcherModul)
+#                                             +2  (comm=SecureElementMo)
+#   hal_fingerprint_default -> default_prop    4
+#   hal_sensors_default -> default_prop        3
+#   vendor_init -> radio_prop                  2  (persist.radio.restart_rild)
+
+dontaudit rild default_prop:file read;
+dontaudit hal_fingerprint_default default_prop:file read;
+dontaudit hal_sensors_default default_prop:file read;
+dontaudit vendor_init radio_prop:file read;
