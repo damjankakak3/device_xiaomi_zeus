@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2026 The Evolution X Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+
+<!--
+     Point the Updater at a self-hosted OTA server instead of the upstream
+     Evolution-X OTA repo, which has no builds for zeus on bka.
+
+     Utils.getServerURL() does a literal replace of "{device}" with
+     ro.updater.next_device, falling back to ro.evolution.device (= zeus here),
+     so the JSON is fetched from /builds/zeus.json.
+
+     This is a plain DEVICE_PACKAGE_OVERLAYS resource override, not an RRO.
+     That is safe because UpdaterVanillaOverlay, the only RRO upstream ships
+     for this app, is gated on WITH_GMS=false in vendor/lineage/config/evolution.mk
+     and this is a GMS build. Verified on device with `cmd overlay list`:
+     no overlay targets org.evolution.updater.
+
+     The xliff namespace is required: menu_changelog_url carries an <xliff:g>
+     tag, and omitting the declaration is a build error.
+-->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="updater_server_url" translatable="false">https://ota.xtn.hu/builds/{device}.json</string>
+    <string name="menu_changelog_url" translatable="false">https://ota.xtn.hu/changelogs/<xliff:g id="device_name">%1$s</xliff:g>.txt</string>
+</resources>
