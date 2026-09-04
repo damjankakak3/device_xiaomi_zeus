@@ -7,6 +7,5 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <!-- Android version screen, build maintainer -->
-    <string name="build_maintainer_summary" translatable="false">Lucifer</string>
-    <string name="build_maintainer_donate_url" translatable="false">https://paypal.me/kaustuv001</string>
+    <string name="build_maintainer_summary" translatable="false">xtn.hu</string>
 </resources>
